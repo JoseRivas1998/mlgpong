@@ -72,6 +72,7 @@ public class Game extends ApplicationAdapter {
 		res.loadMusic("music", "sanic.ogg", "sanic", true);
 		res.loadMusic("music", "whatchasay.ogg", "whatchasay", true);		
 		res.loadMusic("music", "allstar.ogg", "allstar", true);
+		res.loadMusic("sound", "SPOOKY.ogg", "xfiles", true);
 		
 		res.loadBitmapFont("font", "faucet.ttf", "main", 56, Color.WHITE);
 		res.loadBitmapFont("font", "faucet.ttf", "splash", 72, Color.WHITE);

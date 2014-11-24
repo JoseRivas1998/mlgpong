@@ -5,7 +5,7 @@ public class MyInput {
 	private static boolean[] keys;
 	private static boolean[] pkeys;
 
-	private static final int NUM_KEYS = 10;
+	private static final int NUM_KEYS = 11;
 	public static final int UP = 0;
 	public static final int DOWN = 1;
 	public static final int LEFT = 2;
@@ -16,6 +16,7 @@ public class MyInput {
 	public static final int D = 7;
 	public static final int ENTER = 8;
 	public static final int ESCAPE = 9;
+	public static final int ANY = 10;
 
 	static {
 		keys = new boolean[NUM_KEYS];
@@ -41,9 +42,10 @@ public class MyInput {
 	}
 
 	public static boolean anyKeyDown() {
-		for(boolean b : keys) {
-			if(b) return true;
-		}
-		return false;
+		return isDown(ANY);
+	}
+	
+	public static boolean anyKeyPressed() {
+		return isPressed(ANY);
 	}
 }

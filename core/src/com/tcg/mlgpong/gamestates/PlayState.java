@@ -41,7 +41,7 @@ public class PlayState extends GameState {
 		cam.translate(Game.CENTER);
 		cam.update();
 		time = 300;
-//		time = 30;
+//		time = 1;
 		nukeP = false;
 		stateTime = 0;
 		setAnimValues();

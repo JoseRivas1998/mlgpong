@@ -37,6 +37,7 @@ public class MyInputProcessor extends InputAdapter {
 		if(keycode == Keys.ESCAPE) {
 			MyInput.setKey(MyInput.ESCAPE, true);
 		}
+		MyInput.setKey(MyInput.ANY, true);
 		return true;
 	}
 
@@ -72,6 +73,7 @@ public class MyInputProcessor extends InputAdapter {
 		if(keycode == Keys.ESCAPE) {
 			MyInput.setKey(MyInput.ESCAPE, false);
 		}
+		MyInput.setKey(MyInput.ANY, false);
 		return true;
 	}
 

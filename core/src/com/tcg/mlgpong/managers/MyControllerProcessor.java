@@ -14,6 +14,7 @@ public class MyControllerProcessor extends ControllerAdapter {
 		if(buttonIndex == 7) {
 			MyInput.setKey(MyInput.ENTER, true);
 		}
+		MyInput.setKey(MyInput.ANY, true);
 		return true;
 	}
 
@@ -25,6 +26,7 @@ public class MyControllerProcessor extends ControllerAdapter {
 		if(buttonIndex == 7) {
 			MyInput.setKey(MyInput.ENTER, false);
 		}
+		MyInput.setKey(MyInput.ANY, false);
 		return true;
 	}
 

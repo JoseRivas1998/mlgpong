@@ -2,6 +2,7 @@ package com.tcg.mlgpong.gamestates;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tcg.mlgpong.Game;
 import com.tcg.mlgpong.MyCamera;
@@ -58,7 +59,11 @@ public class GameOverState extends GameState {
 	@Override
 	public void handleInput() {
 		if(MyInput.anyKeyDown() && !(time > 0)) {
-			gsm.setState(gsm.TITLE);
+			if(MathUtils.randomBoolean(.15f)) {
+				gsm.setState(gsm.ILLUMINATI);
+			} else {
+				gsm.setState(gsm.TITLE);
+			}
 		}
 	}
 

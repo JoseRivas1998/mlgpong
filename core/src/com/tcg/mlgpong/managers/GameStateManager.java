@@ -16,6 +16,7 @@ public class GameStateManager {
 	public final int SPLASH = 0;
 	public final int TITLE = 1;
 	public final int PLAY = 2;
+	public final int ILLUMINATI = 3;
 	
 	public GameStateManager() {
 		sb = new SpriteBatch();
@@ -34,6 +35,9 @@ public class GameStateManager {
 		} 
 		if(newState == PLAY) {
 			state = new PlayState(this);
+		}
+		if(newState == ILLUMINATI) {
+			state = new IlluminatiState(this);
 		}
 	}
 	
