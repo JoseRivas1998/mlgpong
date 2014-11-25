@@ -124,9 +124,27 @@ public class GameOverState extends GameState {
 		Game.res.getFont("splash").draw(sb, over, oX, oY);
 		Game.res.getFont("splash").draw(sb, result, rX, rY);
 		Game.res.getFont("splash").draw(sb, button, bX, bY);
+		drawScore(sb);
 		if(time > 3.5)sb.draw(Game.getAnimationFrame(Game.nuke, stateTime), 0, 0, Game.SIZE.x, Game.SIZE.y);
 		sb.end();
 
+	}
+
+	private void drawScore(SpriteBatch sb) {
+		String right, left;
+		left = "" + playerScore;
+		right = "" + aiScore;
+		float lX, lY, lW, lH, rX, rY, rW, rH;
+		lW = Game.res.getFont("splash").getBounds(left).width;
+		lH = Game.res.getFont("splash").getBounds(left).height - Game.res.getFont("splash").getDescent();
+		rW = Game.res.getFont("splash").getBounds(right).width;
+		rH = Game.res.getFont("splash").getBounds(right).height - Game.res.getFont("splash").getDescent();
+		lX = (Game.SIZE.x * .45f) - (lW * .5f);
+		lY = (Game.SIZE.y * .35f) + (lH * .5f);
+		rX = (Game.SIZE.x * .55f) - (rW * .5f);
+		rY = (Game.SIZE.y * .35f) + (rH * .5f);
+		Game.res.getFont("splash").draw(sb, left, lX, lY);
+		Game.res.getFont("splash").draw(sb, right, rX, rY);
 	}
 
 	@Override

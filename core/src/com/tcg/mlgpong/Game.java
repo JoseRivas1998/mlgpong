@@ -76,6 +76,7 @@ public class Game extends ApplicationAdapter {
 		
 		res.loadBitmapFont("font", "faucet.ttf", "main", 56, Color.WHITE);
 		res.loadBitmapFont("font", "faucet.ttf", "splash", 72, Color.WHITE);
+		res.loadBitmapFont("font", "faucet.ttf", "small", 32, Color.WHITE);
 		
 		gsm = new GameStateManager();
 		

@@ -19,12 +19,13 @@ public class TitleState extends GameState {
 	private float tX, tY, tW, tH;
 	private float eX, eY, eW, eH;
 	private float escX, escY, escW, escH;
+	private float jX, jY, jH;
 	
 	private float a1X, a1Y, a1W, a1H, a2X, a2Y, a2W, a2H;
 	private float a3X, a3Y, a3W, a3H, a4X, a4Y, a4W, a4H, a5X, a5Y, a5W, a5H;
 	private float mlgX, mlgY, mlgW, mlgH;
 	
-	private String title, enter, escape;
+	private String title, enter, escape, jose;
 
 	public TitleState(GameStateManager gsm) {
 		super(gsm);
@@ -123,16 +124,20 @@ public class TitleState extends GameState {
 	private void setTextValues() {
 		enter = "Press 3nter to Begin";
 		escape = "Press 3scape to 3xit";
+		jose = "Created by Jose Rodriguez-Rivas";
 		float descent;
 		descent = Game.res.getFont("splash").getDescent();
 		eW = Game.res.getFont("splash").getBounds(enter).width;
-		eH = Game.res.getFont("splash").getBounds(enter).height + descent;
+		eH = Game.res.getFont("splash").getBounds(enter).height - descent;
 		eX = Game.CENTER.x - (eW * .5f);
 		eY = Game.CENTER.y + (eH * .5f);
 		escW = Game.res.getFont("splash").getBounds(escape).width;
-		escH = Game.res.getFont("splash").getBounds(escape).height + descent;
+		escH = Game.res.getFont("splash").getBounds(escape).height - descent;
 		escX = Game.CENTER.x - (escW * .5f);
 		escY = (Game.SIZE.y * .25f) + (escH * .5f);
+		jH = Game.res.getFont("small").getBounds(jose).height - descent;
+		jX = 0;
+		jY = jH;
 	}
 	
 	private void drawText(SpriteBatch sb) {
@@ -140,6 +145,7 @@ public class TitleState extends GameState {
 		Game.res.getFont("splash").draw(sb, title, tX, tY);
 		Game.res.getFont("splash").draw(sb, enter, eX, eY);
 		Game.res.getFont("splash").draw(sb, escape, escX, escY);
+		Game.res.getFont("small").draw(sb, jose, jX, jY);
 	}
 
 	@Override

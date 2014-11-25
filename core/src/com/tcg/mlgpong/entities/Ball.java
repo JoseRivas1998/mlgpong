@@ -36,6 +36,8 @@ public class Ball extends Entity {
 	
 	private float time, timer;	
 	
+	private Array<Vector2> vec;
+	
 	public Ball(Vector2 position, float width, float height, int bounceMode) {
 		bounds = new Rectangle(position.x, position.y, width, height);
 		bounds.x = position.x;
@@ -61,6 +63,7 @@ public class Ball extends Entity {
 		timer = 1;
 		sanT = new Texture("entities/sanic.png");
 		sanic = new TextureRegion(sanT);
+		vec = new Array<Vector2>();
 		reset();
 		
 	}
@@ -130,6 +133,7 @@ public class Ball extends Entity {
 			time = 0;
 		}
 		calcSpeed = (float) Math.sqrt(((Math.pow(((bounds.x + vel.x) - bounds.x), 2)) + (Math.pow(((bounds.y + vel.y) - bounds.y), 2))));
+		vec.add(getPosition());
 	}
 	
 	private void bounceAllSides() {
@@ -215,6 +219,7 @@ public class Ball extends Entity {
 	}
 	
 	public void reset() {
+		vec.clear();
 		hitmarkers.clear();
 		speed = 10;
 		randomAnimIndex = MathUtils.random(numAnims - 1);
@@ -238,6 +243,10 @@ public class Ball extends Entity {
 
 	public Array<Vector2> getHitmarkers() {
 		return hitmarkers;
+	}
+
+	public Array<Vector2> getVec() {
+		return vec;
 	}
 
 }
