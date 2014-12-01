@@ -69,6 +69,7 @@ public class GameOverState extends GameState {
 
 	@Override
 	public void update(float dt) {
+		Game.flicker = false;
 		if(time >= 0) {
 			time -= dt;
 			float seconds = time;
@@ -125,7 +126,7 @@ public class GameOverState extends GameState {
 		Game.res.getFont("splash").draw(sb, result, rX, rY);
 		Game.res.getFont("splash").draw(sb, button, bX, bY);
 		drawScore(sb);
-		if(time > 3.5)sb.draw(Game.getAnimationFrame(Game.nuke, stateTime), 0, 0, Game.SIZE.x, Game.SIZE.y);
+		if(time > (5 - Game.nuke.getAnimationDuration()))sb.draw(Game.getAnimationFrame(Game.nuke, stateTime), 0, 0, Game.SIZE.x, Game.SIZE.y);
 		sb.end();
 
 	}

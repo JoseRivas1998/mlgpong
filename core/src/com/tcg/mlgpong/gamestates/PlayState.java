@@ -18,14 +18,15 @@ public class PlayState extends GameState {
 	private Ball b;
 	private Texture hit;
 	private Paddle player, opponent;
-	private int rightScore, leftScore;
+	private int rightScore, leftScore, rightStreak, leftStreak;
 	private float time;
 	private boolean nukeP;
 	
 	private float a1X, a1Y, a1W, a1H, a2X, a2Y, a2W, a2H;
 	private float a3X, a3Y, a3W, a3H, a4X, a4Y, a4W, a4H, a5X, a5Y, a5W, a5H;
 	private float a6X, a6Y, a6W, a6H;
-	private float stateTime;
+	private float stateTime, time1, time2, wallyTime, time3, gunTime;
+	private boolean wally, gun;
 
 	public PlayState(GameStateManager gsm) {
 		super(gsm);
@@ -44,6 +45,15 @@ public class PlayState extends GameState {
 //		time = 1;
 		nukeP = false;
 		stateTime = 0;
+		time1 = 1;
+		wallyTime = Game.wow.getAnimationDuration();
+		gunTime = Game.gun.getAnimationDuration();
+		wally = false;
+		gun = false;
+		time3 = gunTime;
+		time2 = wallyTime;
+		rightStreak = 0;
+		leftStreak = 0;
 		setAnimValues();
 		Game.res.getSound("airhorn").play(); 
 	}
@@ -118,6 +128,17 @@ public class PlayState extends GameState {
 		a6Y = MathUtils.random((Game.SIZE.y - a6H));
 	}
 
+	private void setTimer(float dt) {
+		time -= dt;
+		if(time <= 0) {
+			gsm.gameOver(leftScore, rightScore);
+		}
+		if(time <= 5.546 && !nukeP) {
+			nukeP = true;
+			Game.res.getSound("nuke").play();
+		}
+	}
+
 	@Override
 	public void handleInput() {
 		if(MyInput.isPressed(MyInput.ESCAPE)) gsm.setState(gsm.TITLE);
@@ -132,29 +153,50 @@ public class PlayState extends GameState {
 		b.collisions(opponent);
 		scoreCheck();
 		setTimer(dt);
-	}
-	
-	private void setTimer(float dt) {
-		time -= dt;
-		if(time <= 0) {
-			gsm.gameOver(leftScore, rightScore);
-		}
-		if(time <= 5.546 && !nukeP) {
-			nukeP = true;
-			Game.res.getSound("nuke").play();
-		}
+		time1 += dt;
+		time2 += dt;
+		time3 += dt;
+		wally = time2 < wallyTime;
+		gun = (time3 < gunTime) && !wally;
+		Game.flicker = (time1 < 1) && !wally;
 	}
 	
 	private void scoreCheck() {
 		if(b.getX() <= -50) {
 			rightScore++;
+			rightStreak++;
+			leftStreak = 0;
 			Game.res.getRandomSadSound().play();
 			setAnimValues();
 		}
 		if(b.getX() >= Game.SIZE.x - b.getWidth() + 50) {
 			leftScore++;
-			Game.res.getRandomHappySound().play();
+			leftStreak++;
+			rightStreak = 0;
+			if(MathUtils.randomBoolean()) {
+				time1 = 0;
+				time2 = wallyTime;
+				time3 = gunTime;
+			} else if(MathUtils.randomBoolean()) {
+				time1 = 1;
+				time2 = 0;
+				time3 = gunTime;
+			} else {
+				time1 = 1;
+				time2 = wallyTime;
+				time3 = 0;
+			}
+			if(leftStreak == 3) {
+				Game.res.getSound("triple").play();
+			} else if(leftScore == 21) {
+				Game.res.getSound("21").play();
+			} else {
+				Game.res.getRandomHappySound().play();
+			}
 			setAnimValues();
+		}
+		if(leftStreak == 25 || rightStreak == 25) {
+			time = 7;
 		}
 	}
 
@@ -182,10 +224,12 @@ public class PlayState extends GameState {
 		b.draw(sr, sb, dt);
 		drawScore(sb);
 		drawTime(sb);
+		if(gun) sb.draw(Game.getAnimationFrame(Game.gun, time3), 0, 0, Game.SIZE.x, Game.SIZE.y);
 		sb.end();
 	}
 	
 	private void drawAnimations(SpriteBatch sb, float stateTime) {
+		if(wally) sb.draw(Game.getAnimationFrame(Game.wow, time2), 0, 0, Game.SIZE.x, Game.SIZE.y);
 		sb.draw(Game.getAnimationFrame(Game.snoop, stateTime), a1X, a1Y, a1W, a1H);
 		sb.draw(Game.getAnimationFrame(Game.frog, stateTime), a2X, a2Y, a2W, a2H);
 		sb.draw(Game.getAnimationFrame(Game.shrek, stateTime), a3X, a3Y, a3W, a3H);

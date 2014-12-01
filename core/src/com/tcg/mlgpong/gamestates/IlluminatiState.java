@@ -38,6 +38,7 @@ public class IlluminatiState extends GameState {
 
 	@Override
 	public void update(float dt) {
+		Game.flicker = false;
 		time += dt;
 		if(time < timer1) {
 			setTextValues("But Wait");

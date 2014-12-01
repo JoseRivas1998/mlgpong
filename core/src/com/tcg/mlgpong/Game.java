@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.tcg.mlgpong.managers.Content;
 import com.tcg.mlgpong.managers.GameStateManager;
@@ -21,7 +22,7 @@ public class Game extends ApplicationAdapter {
 	
 	public static Vector2 SIZE, CENTER;
 	
-	public static Animation snoop, frog, mlg, shrek, kid, spook, nuke;
+	public static Animation snoop, frog, mlg, shrek, kid, spook, nuke, wow, gun;
 	
 	public static Content res;
 	
@@ -29,6 +30,8 @@ public class Game extends ApplicationAdapter {
 	public int frames, fps;
 	
 	private Texture t;
+	
+	public static boolean flicker;
 	
 	@Override
 	public void create () {
@@ -51,6 +54,8 @@ public class Game extends ApplicationAdapter {
 		res.loadSound("sound", "HITMARKER.ogg", "hitmarker");
 		res.loadSound("sound", "nuke.ogg", "nuke");
 		res.loadSound("sound", "explode.ogg", "explode");
+		res.loadSound("sound", "21.ogg", "21");
+		res.loadSound("sound", "triple.ogg", "triple");
 		
 		//happy sound
 		res.loadHappySound("sound", "airporn.ogg");
@@ -66,6 +71,13 @@ public class Game extends ApplicationAdapter {
 		//sad sound
 		res.loadSadSound("sound", "2SAD4ME.ogg");
 		res.loadSadSound("sound", "whatchasay.ogg");
+		res.loadSadSound("sound", "heartwillgoon.ogg");
+		res.loadSadSound("sound", "onlytime36db.ogg");
+		res.loadSadSound("sound", "onlytime.ogg");
+		res.loadSadSound("sound", "stoopid.ogg");
+		res.loadSadSound("sound", "stoopid36db.ogg");
+		res.loadSadSound("sound", "2SED4AIRHORN.ogg");
+		res.loadSadSound("sound", "sontana.ogg");
 
 		res.loadMusic("music", "sandstorm.ogg", "sandstorm", true);		
 		res.loadMusic("music", "dankstorm.ogg", "dankstorm", true);		
@@ -79,6 +91,8 @@ public class Game extends ApplicationAdapter {
 		res.loadBitmapFont("font", "faucet.ttf", "small", 32, Color.WHITE);
 		
 		gsm = new GameStateManager();
+		
+		flicker = false;
 		
 		Gdx.input.setInputProcessor(new MyInputProcessor());
 		Gdx.input.setCursorCatched(true);
@@ -159,6 +173,28 @@ public class Game extends ApplicationAdapter {
 			nuke[i - 7] = new TextureRegion(t);
 		}
 		
+		path = "wow/frame_0";
+		TextureRegion[] wow = new TextureRegion[48];
+		for(int i = 0; i < wow.length; i++) {
+			if(i < 10) {
+				t = new Texture(path + "0" + i + ".gif");
+			} else {
+				t = new Texture(path + i + ".gif");
+			}
+			wow[i] = new TextureRegion(t);
+		}
+		
+		path = "gun/frame_0";
+		TextureRegion[] gun = new TextureRegion[48];
+		for(int i = 0; i < gun.length; i++) {
+			if(i < 10) {
+				t = new Texture(path + "0" + i + ".gif");
+			} else {
+				t = new Texture(path + i + ".gif");
+			}
+			gun[i] = new TextureRegion(t);
+		}
+		
 		Game.snoop = new Animation(.05f, snoop);
 		Game.mlg = new Animation(.1f, mlg);
 		Game.frog = new Animation(.05f, frog);
@@ -166,11 +202,17 @@ public class Game extends ApplicationAdapter {
 		Game.kid = new Animation(.1f, kid);
 		Game.spook = new Animation(.125f, spook);
 		Game.nuke = new Animation(.1f, nuke);
+		Game.wow = new Animation(.1f, wow);
+		Game.gun = new Animation(.05f, gun);
 	}
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0, 0, 0, 1);
+		if(Game.flicker) {
+			Gdx.gl.glClearColor(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1); 
+		} else { 
+			Gdx.gl.glClearColor(0, 0, 0, 1); 
+		}
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
 		frames++;

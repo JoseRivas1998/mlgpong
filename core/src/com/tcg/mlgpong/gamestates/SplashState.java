@@ -85,6 +85,7 @@ public class SplashState extends GameState {
 
 	@Override
 	public void update(float dt) {
+		Game.flicker = false;
 		imgW = currentFrame.getRegionWidth();
 		imgH = currentFrame.getRegionHeight();
 		imgY = Game.CENTER.y - (imgH * .5f);

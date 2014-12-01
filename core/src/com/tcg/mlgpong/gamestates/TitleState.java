@@ -83,13 +83,13 @@ public class TitleState extends GameState {
 
 	@Override
 	public void update(float dt) {
+		Game.flicker = false;
 		setTitleValues();
 		setTextValues();
 	}
 
 	@Override
 	public void draw(SpriteBatch sb, ShapeRenderer sr, float dt) {
-		// TODO Auto-generated method stub
 		stateTime += dt;
 		sb.begin();
 		sb.setProjectionMatrix(cam.combined);
