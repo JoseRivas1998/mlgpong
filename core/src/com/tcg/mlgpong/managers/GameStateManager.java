@@ -22,7 +22,6 @@ public class GameStateManager {
 		sb = new SpriteBatch();
 		sr = new ShapeRenderer();
 		setState(SPLASH);
-//		setState(ILLUMINATI);
 	}
 	
 	public void setState(int newState) {

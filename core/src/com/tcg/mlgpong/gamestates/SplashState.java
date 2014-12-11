@@ -116,7 +116,6 @@ public class SplashState extends GameState {
 		sb.draw(Game.getAnimationFrame(Game.snoop, stateTime), snoopX, snoopY, snoopX + (snoopW * .5f), snoopY + (snoopH * .5f), snoopW, snoopH, 1, 1, rotation);
 		sb.setColor(Color.WHITE);
 		sb.draw(currentFrame, imgX, imgY);
-//		Game.res.getFont("splash").setColor(MathUtils.random(), MathUtils.random(), MathUtils.random(), 1);
 		Game.res.getFont("splash").draw(sb, splash, tX, tY);
 		sb.end();
 
@@ -129,9 +128,6 @@ public class SplashState extends GameState {
 	}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
+	public void dispose() {}
 
 }

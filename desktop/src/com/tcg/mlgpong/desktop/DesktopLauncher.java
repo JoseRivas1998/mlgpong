@@ -13,9 +13,6 @@ public class DesktopLauncher {
 		config.width = Toolkit.getDefaultToolkit().getScreenSize().width;
 		config.height = Toolkit.getDefaultToolkit().getScreenSize().height;
 		config.fullscreen = true;
-//		config.width = 800;
-//		config.height = 600;
-//		config.fullscreen = false;
 		String p = "icon/";
 		config.addIcon(p + "win.png", Files.FileType.Internal);
 		config.addIcon(p + "lin.png", Files.FileType.Internal);

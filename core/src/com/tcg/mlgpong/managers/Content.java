@@ -28,10 +28,6 @@ public class Content {
 		happySound = new Array<Sound>();
 	}
 	
-	/*
-	 * Music
-	 */
-	
 	public void loadMusic(String folder, String path, String key, boolean looping) {
 		Music m = Gdx.audio.newMusic(Gdx.files.internal(folder + "/" + path));
 		m.setLooping(looping);
@@ -48,10 +44,6 @@ public class Content {
 			music.setVolume(vol);
 		}
 	}
-	
-	/*
-	 * Sound
-	 */
 	
 	public void loadSound(String folder, String path, String key) {
 		Sound s = Gdx.audio.newSound(Gdx.files.internal(folder + "/" + path));
@@ -80,10 +72,6 @@ public class Content {
 		return happySound.get(MathUtils.random(happySound.size - 1));
 	}
 	
-	/*
-	 * Bitmap Font
-	 */
-	
 	@SuppressWarnings("deprecation")
 	public void loadBitmapFont(String folder, String path, String key, int size, Color color) {
 		FreeTypeFontGenerator gen = new FreeTypeFontGenerator(Gdx.files.internal(folder + "/" + path));
@@ -95,10 +83,6 @@ public class Content {
 	public BitmapFont getFont(String key) {
 		return font.get(key);
 	}
-	
-	/*
-	 * Other
-	 */
 	
 	public void removeAll() {
 		for(Object o : music.values()) {

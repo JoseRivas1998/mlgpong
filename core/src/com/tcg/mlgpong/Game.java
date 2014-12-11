@@ -47,7 +47,6 @@ public class Game extends ApplicationAdapter {
 		
 		res = new Content();
 		
-		//normal sound
 		res.loadSound("sound", "airporn.ogg", "airporn");
 		res.loadSound("sound", "airhorn.ogg", "airhorn");
 		res.loadSound("sound", "SPOOKY.ogg", "xfiles");
@@ -57,7 +56,6 @@ public class Game extends ApplicationAdapter {
 		res.loadSound("sound", "21.ogg", "21");
 		res.loadSound("sound", "triple.ogg", "triple");
 		
-		//happy sound
 		res.loadHappySound("sound", "airporn.ogg");
 		res.loadHappySound("sound", "getnoscoped.ogg");
 		res.loadHappySound("sound", "wombo.ogg");
@@ -68,7 +66,6 @@ public class Game extends ApplicationAdapter {
 		res.loadHappySound("sound", "scary.ogg");
 		res.loadHappySound("sound", "smokeweed.ogg");
 		
-		//sad sound
 		res.loadSadSound("sound", "2SAD4ME.ogg");
 		res.loadSadSound("sound", "whatchasay.ogg");
 		res.loadSadSound("sound", "heartwillgoon.ogg");

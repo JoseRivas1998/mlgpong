@@ -155,9 +155,6 @@ public class TitleState extends GameState {
 	}
 
 	@Override
-	public void dispose() {
-		// TODO Auto-generated method stub
-
-	}
+	public void dispose() {}
 
 }

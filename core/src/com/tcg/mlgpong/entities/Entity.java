@@ -37,7 +37,7 @@ public abstract class Entity {
 	}
 	
 	public void setY(float y) {
-		bounds.x = y;
+		bounds.y = y;
 	}
 	
 	public float getWidth() {
